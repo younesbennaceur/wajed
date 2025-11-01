@@ -32,7 +32,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="">
-            <img className='h-12 w-16' src="./Logo.png" alt="" />
+            <img className='h-8 w-12 md:h-12 md:w-16' src="./Logo.png" alt="" />
           </div>
 
           {/* Desktop Menu */}

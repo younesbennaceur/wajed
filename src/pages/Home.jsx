@@ -5,6 +5,8 @@ import Fonctionnalités from '../components/Fonctionnalités.jsx';
 import WhyUs from '../components/WhyUs.jsx';
 import Faqs from '../components/Faqs.jsx';
 import ContactSection from '../components/ConatctUs.jsx';
+import Cta from '../components/Cta.jsx';
+import Footer from '../components/Footer.jsx';
 
 export default function Home() {
   return (
@@ -24,10 +26,18 @@ export default function Home() {
       <section id="faq">
         <Faqs />
       </section>
+       
+
+
       
       <section id="contact">
         <ContactSection />
       </section>
+       <section id="cta">
+        <Cta />
+        </section>
+        <Footer />
+
     </div>
   )
 }
