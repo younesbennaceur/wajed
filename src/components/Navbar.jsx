@@ -63,7 +63,7 @@ export default function Navbar({ variant = 'home' }) {
   const superAppLinks = [
     { name: 'Wajed Home Services', path: '/services', icon: './Logo.png' },
     { name: 'Wajed Experience', path: '/experience', icon: './exp.png' },
-    { name: 'Wajed Go', path: '/go', icon: './go.png' }
+    { name: 'Wajed Go', icon: './go.png' }
   ];
 
   const handleNavClick = (e, sectionId) => {
@@ -255,7 +255,7 @@ export default function Navbar({ variant = 'home' }) {
                     onClick={() => handleSuperAppClick(link.path)}
                     className={`w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-600 transition-colors ${currentTheme.textHover}`}
                   >
-                    {link.icon && <img src={link.icon} alt="" className="w-5 h-5 opacity-80" />}
+                    {link.icon && <img src={link.icon} alt="" className="w-10 h-5 " />}
                     <span>{link.name}</span>
                   </button>
                 ))}

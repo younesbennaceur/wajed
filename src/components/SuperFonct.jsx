@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 
 export default function SuperFonct() {
   
@@ -16,6 +17,7 @@ export default function SuperFonct() {
   const features = [
     {
       id: "01",
+      link: "/services",
       brand: "Wajed",
       service: "Home Services",
       tagline: "Trouvez un prestataire",
@@ -31,6 +33,7 @@ export default function SuperFonct() {
     {
       id: "02",
       brand: "Wajed",
+      link: "/experience",
       service: "Experience",
       tagline: "Toutes les activités en un clic.",
       mainHeading: "Amusez vous! 🏄",
@@ -132,9 +135,9 @@ export default function SuperFonct() {
                     className="group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full border-2 bg-white transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-lg"
                     style={{ borderColor: feature.color }}
                   >
-                    <span className="font-bold text-sm sm:text-base" style={{ color: feature.color }}>
+                    <Link to={feature.link} className="font-bold text-sm sm:text-base" style={{ color: feature.color }}>
                       {feature.buttonText}
-                    </span>
+                    </Link>
                     {/* Petite flèche qui bouge au hover */}
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
