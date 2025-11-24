@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export default function Hero() {
+export default function HeroExperience() {
   
   useEffect(() => {
     AOS.init({
@@ -27,56 +27,54 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* Conteneur Principal avec un dégradé plus doux et sophistiqué */}
-      <div className="relative bg-gradient-to-br from-white via-[#F2F9F7] to-[#C7E8DB] max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-24 rounded-[2.5rem] shadow-sm border border-white/50">
+      {/* Conteneur Principal : Dégradé ajusté vers des tons chauds/orange doux */}
+      <div className="relative bg-gradient-to-br from-white via-[#FFF8F2] to-[#FFE0C2] max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-24 rounded-[2.5rem] shadow-sm border border-white/50">
         
-        {/* Élément décoratif d'arrière-plan (Cercle flou subtil) */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#4C9580] rounded-full mix-blend-multiply filter blur-[120px] opacity-10 animate-pulse pointer-events-none"></div>
+        {/* Élément décoratif d'arrière-plan (Cercle flou Orange) */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#F2994A] rounded-full mix-blend-multiply filter blur-[120px] opacity-10 animate-pulse pointer-events-none"></div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center py-10  relative z-10">
           
           {/* --- Colonne Gauche : Texte --- */}
           <div className="space-y-4 text-center md:text-left">
             
-            {/* Badge amélioré : Style "pillule" doux */}
+            {/* Badge amélioré : Orange */}
             <div 
               data-aos="fade-down"
-              className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/80 backdrop-blur-md border border-[#4C9580]/20 rounded-full shadow-sm w-fit mx-auto md:mx-0"
+              className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/80 backdrop-blur-md border border-[#F2994A]/20 rounded-full shadow-sm w-fit mx-auto md:mx-0"
             >
-              <img src="Badge.svg" alt="" className="w-5 h-5 drop-shadow-sm" />
-              <span className="text-sm font-semibold text-[#3A7E6A] tracking-wide">
+              <img src="BadgeOrange.svg" alt="" className="w-5 h-5 drop-shadow-sm" />
+              <span className="text-sm font-semibold text-[#D97706] tracking-wide">
                 Nouveau sur mobile
               </span>
             </div>
 
-            {/* Titre avec mise en valeur de couleur */}
+            {/* Titre avec dégradé Orange */}
             <h1 
               data-aos="fade-up" 
               data-aos-delay="100"
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-[1.15]"
             >
-              Tous Vos Services <br />
-              Du Quotidien <br />
-              Réunis Dans <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4C9580] to-[#2D6A58]">Une Seule App</span>
+              Vivez l'Algérie  <br />
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2994A] to-[#D35400]">autrement</span>
             </h1>
 
-            {/* Description plus lisible */}
+            {/* Description */}
             <p 
               data-aos="fade-up" 
               data-aos-delay="200"
               className="text-base sm:text-lg text-gray-600 max-w-lg mx-auto md:mx-0 leading-relaxed font-medium"
             >
-              Trouvez en quelques clics un prestataire de confiance pour vos besoins en ménage, beauté, bricolage et bien plus encore.
+              Trouvez en quelques clics des activités inoubliables : sorties en bateau, randonnées, balades à cheval et bien plus encore.
             </p>
 
-            {/* CTA Button Premium */}
+            {/* CTA Button Premium : Orange */}
             <div 
-             
               className="flex justify-center md:justify-start pt-2"
               data-aos="fade-up" 
               data-aos-delay="200"
             >
-              <button className="group relative flex items-center gap-3 bg-[#4C9580] text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 shadow-lg shadow-[#4C9580]/30 hover:shadow-[#4C9580]/50 overflow-hidden">
+              <button className="group relative flex items-center gap-3 bg-[#F2994A] text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 shadow-lg shadow-[#F2994A]/30 hover:shadow-[#F2994A]/50 overflow-hidden">
                 {/* Effet de brillance au survol */}
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
                 
@@ -105,10 +103,11 @@ export default function Hero() {
               className="relative animate-float z-20"
             >
                <img 
-                 src="/Hero.png" 
-                 alt="Application Wajed Interface" 
+                 src="/heroexp.png" 
+                 alt="Wajed Experience Interface" 
                  className="max-w-full md:max-w-[110%] h-auto drop-shadow-2xl"
-                 style={{ filter: "drop-shadow(0px 20px 40px rgba(76, 149, 128, 0.25))" }} // Ombre colorée douce
+                 // Ombre portée adaptée à la couleur orange (RGBA: 242, 153, 74)
+                 style={{ filter: "drop-shadow(0px 20px 40px rgba(242, 153, 74, 0.25))" }} 
                />
             </div>
           </div>

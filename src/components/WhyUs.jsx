@@ -14,7 +14,7 @@ export default function Pourquoi() {
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
             <span className="text-black">Pourquoi </span>
-            <span className="text-teal-600">Wajed</span>
+            <span className="text-[#4C9580] ">Wajed</span>
             <span className="text-black"> ?</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -59,11 +59,11 @@ export default function Pourquoi() {
           <div className=" md:flex justify-center items-center">
             <div className="relative w-full h-96 flex justify-center items-center">
               {/* Phones Container */}
-              <div className="relative w-full max-w-sm h-full flex justify-center items-center">
-              <img className="w-148 lg:h-120" src="./pourquoi.png" alt="" />
+              
+              <img className="w-128 lg:h-120" src="./pourquoi.png" alt="" />
 
               
-              </div>
+            
             </div>
           </div>
 

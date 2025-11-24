@@ -1,8 +1,19 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
+  useEffect(() => {
+      AOS.init({
+        duration: 1000, // Une animation douce (1 seconde)
+        once: true,     // L'animation ne se joue qu'une fois pour ne pas gêner la lecture
+        offset: 100,    // Déclenche l'animation un peu avant que l'élément soit tout en haut
+        easing: 'ease-out-cubic', // Une courbe de vitesse naturelle
+      });
+    }, []);
 
   const faqs = [
     {
@@ -32,8 +43,8 @@ export default function FAQ() {
   };
 
   return (
-    <div className="bg-white py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div  className="bg-white  py-12 md:py-20">
+      <div data-aos="fade-down" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-black">

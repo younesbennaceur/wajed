@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function FeaturesSection() {
+  
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Une animation douce (1 seconde)
+      once: true,     // L'animation ne se joue qu'une fois pour ne pas gêner la lecture
+      offset: 100,    // Déclenche l'animation un peu avant que l'élément soit tout en haut
+      easing: 'ease-out-cubic', // Une courbe de vitesse naturelle
+    });
+  }, []);
+
   const features = [
     {
       id: "01",
@@ -37,33 +49,37 @@ export default function FeaturesSection() {
       buttonText: "100% sécurisé",
       imageSrc: "4.png",
       imagePosition: "left"
-    },{
-    id: "05",
-        title: "Gagnez des récompenses",
-        titleBold: " en invitant vos proches",
-        description: "Invitez vos amis à rejoindre l’application. Lorsqu’ils s’inscrivent, ils reçoivent 200 DA et vous gagnez 100 DA dès leur première prestation.",
-        buttonText: "Disponible pour tous les utilisateurs",
-        imageSrc: "5.png",
-        imagePosition: "right"
+    },
+    {
+      id: "05",
+      title: "Gagnez des récompenses",
+      titleBold: " en invitant vos proches",
+      description: "Invitez vos amis à rejoindre l’application. Lorsqu’ils s’inscrivent, ils reçoivent 200 DA et vous gagnez 100 DA dès leur première prestation.",
+      buttonText: "Disponible pour tous les utilisateurs",
+      imageSrc: "5.png",
+      imagePosition: "right"
     }
   ];
 
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-white">
+    <section className="py-16 md:py-24 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* En-tête de section */}
-        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+        <div 
+          className="text-center mb-12 md:mb-16 lg:mb-20"
+          data-aos="fade-down" // Le titre descend du haut
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
             Un Service,<br />
             Plusieurs Possibilités
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
             Profitez de nos solutions flexibles pour tous vos besoins du quotidien. Une plateforme complète à portée de main.
           </p>
         </div>
 
         {/* Liste des fonctionnalités */}
-        <div className="space-y-8 md:space-y-16 lg:space-y-16">
+        <div className="space-y-16 md:space-y-24 lg:space-y-32">
           {features.map((feature, index) => (
             <div
               key={feature.id}
@@ -71,14 +87,16 @@ export default function FeaturesSection() {
                 feature.imagePosition === 'left' ? 'md:flex-row-reverse' : ''
               }`}
             >
-              {/* Contenu texte */}
+              {/* --- Contenu texte --- */}
               <div
                 className={`space-y-4 md:space-y-6 ${
                   feature.imagePosition === 'left' ? 'md:order-2' : 'md:order-1'
                 }`}
+                // Logique d'animation : Si l'image est à gauche (donc texte à droite), le texte vient de la droite (fade-left). Sinon l'inverse.
+                data-aos={feature.imagePosition === 'left' ? "fade-left" : "fade-right"}
               >
                 {/* Numéro */}
-                <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-[#4C9580] opacity-20">
+                <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-[#4C9580] opacity-20 select-none">
                   {feature.id}
                 </div>
 
@@ -94,23 +112,28 @@ export default function FeaturesSection() {
                 </p>
 
                 {/* Bouton */}
-                <button className="inline-block px-6 py-3 bg-white border-2 border-gray-300 hover:border-[#4C9580]  text-gray-700 hover:text-[#4C9580]  font-medium rounded-full transition-all duration-300 text-sm sm:text-base">
+                <button className="inline-block px-6 py-3 bg-white border-2 border-gray-300 hover:border-[#4C9580] text-gray-700 hover:text-[#4C9580] font-medium rounded-full transition-all duration-300 text-sm sm:text-base hover:scale-105 active:scale-95">
                   {feature.buttonText}
                 </button>
               </div>
 
-              {/* Image */}
+              {/* --- Image --- */}
               <div
                 className={`relative ${
                   feature.imagePosition === 'left' ? 'md:order-1' : 'md:order-2'
                 }`}
+                // Logique d'animation : Inverse du texte pour qu'ils se rencontrent au milieu
+                data-aos={feature.imagePosition === 'left' ? "fade-right" : "fade-left"}
+                // Petit délai supplémentaire pour que l'image arrive juste après le texte (optionnel, supprimez si vous préférez synchro)
+                data-aos-delay="100" 
               >
-                <div className="relative  ">
-                  {/* Placeholder pour l'image - Remplacez par vos images locales */}
-               <img src={feature.imageSrc} alt="" />
-
-                  {/* Effet de décoration */}
-                
+                <div className="relative group">
+                   {/* Ajout de style à l'image pour qu'elle soit plus belle (arrondie + ombre) */}
+                   <img 
+                    src={feature.imageSrc} 
+                    alt={feature.title} 
+                    className="w-full h-auto   transition-transform duration-500 group-hover:scale-[1.02]" 
+                   />
                 </div>
               </div>
             </div>
