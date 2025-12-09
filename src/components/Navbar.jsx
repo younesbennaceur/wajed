@@ -40,7 +40,17 @@ export default function Navbar({ variant = 'home' }) {
       textHover: 'hover:text-[#26C6DA]',
       bgHoverLight: 'hover:bg-[#26C6DA]/5',
       shadow: 'shadow-[#26C6DA]/30'
+    },
+    club: {
+      color: '#8E44AD',
+      logo: '/club.png',
+      buttonBg: 'bg-[#8E44AD]',
+      buttonHover: 'hover:bg-[#732d91]',
+      textHover: 'hover:text-[#8E44AD]',
+      bgHoverLight: 'hover:bg-[#8E44AD]/5',
+      shadow: 'shadow-[#8E44AD]/30'
     }
+
   };
 
   const currentTheme = themes[variant] || themes.home;
@@ -63,7 +73,8 @@ export default function Navbar({ variant = 'home' }) {
   const superAppLinks = [
     { name: 'Wajed Home Services', path: '/services', icon: './Logo.png' },
     { name: 'Wajed Experience', path: '/experience', icon: './exp.png' },
-    { name: 'Wajed Go', icon: './go.png' }
+    { name: 'Wajed Go', icon: './go.png' },
+    { name: 'Wajed Club', icon: './club.png' }
   ];
 
   const handleNavClick = (e, sectionId) => {

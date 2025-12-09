@@ -24,7 +24,7 @@ export default function SuperFonct() {
       mainHeading: "Laissez les pro s'en occuper 🛠️",
       description: "Postez une annonce ou trouvez un prestataire qualifié!",
       buttonText: "Découvrez les fonctionnalités de Wajed Home Services",
-      imageSrc: "super1.png", // Mets le nom de ton image (celle du haut)
+      imageSrc: "super1.png", 
       imagePosition: "right",
       color: "#4C9580", // Vert
       bgGlow: "bg-[#4C9580]/20",
@@ -39,7 +39,7 @@ export default function SuperFonct() {
       mainHeading: "Amusez vous! 🏄",
       description: "Réservez une sortie en bateau, une balade a cheval le long de la plage ou une excursion en jetski? Trouvez encore plus d'activités!",
       buttonText: "Découvrez les fonctionnalités de Wajed Experience",
-      imageSrc: "super2.png", // Mets le nom de ton image (celle du milieu)
+      imageSrc: "super2.png", 
       imagePosition: "left",
       color: "#F2994A", // Orange
       bgGlow: "bg-[#F2994A]/20",
@@ -49,15 +49,33 @@ export default function SuperFonct() {
       id: "03",
       brand: "Wajed",
       service: "Go",
+     
       tagline: "Bougez en toute confiance!",
       mainHeading: "Partagez votre trajet 🚗",
       description: "La route solo c'est ennuyant 🥺 Faites des économies, partagez la route!",
       buttonText: "Découvrez les fonctionnalités de Wajed Go",
-      imageSrc: "super3.png", // Mets le nom de ton image (celle du bas)
+      imageSrc: "super3.png", 
       imagePosition: "right",
       color: "#26C6DA", // Cyan/Bleu ciel
       bgGlow: "bg-[#26C6DA]/20",
       delay: 200
+    },
+    // --- NOUVELLE SECTION AJOUTÉE (Wajed Club) ---
+    {
+      id: "04",
+      brand: "Wajed",
+      service: "Club",
+     
+      tagline: "Entrez dans le CLUB !",
+      mainHeading: "Des avantages exclusifs 💎",
+      // J'ai combiné les points de l'image en une phrase fluide
+      description: "Profitez de frais de réservation gratuits, -10% sur tous les services Wajed, du Cashback, des Workshops exclusifs et bien plus encore !",
+      buttonText: "Rejoindre le Wajed Club",
+      imageSrc: "super4.png", // N'oublie pas d'ajouter cette image
+      imagePosition: "left", // Alternance : Gauche
+      color: "#FF5252", // Rose/Rouge (Couleur du logo Club)
+      bgGlow: "bg-[#FF5252]/20",
+      delay: 300
     }
   ];
 
@@ -72,13 +90,12 @@ export default function SuperFonct() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* --- Header Encadré (Style Image) --- */}
+        {/* --- Header Encadré --- */}
         <div 
           className="max-w-4xl mx-auto mb-8 relative"
           data-aos="fade-down"
         >
-          
-          <div className="text-center  px-6 relative bg-white/50 backdrop-blur-sm rounded-[2.5rem]">
+          <div className="text-center px-6 relative bg-white/50 backdrop-blur-sm rounded-[2.5rem]">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
               Une App Qui En Cache <br className="hidden sm:block"/>
               Des Autres 🙈
@@ -129,7 +146,7 @@ export default function SuperFonct() {
                   {feature.description}
                 </p>
 
-                {/* Bouton Pillule (Style Image) */}
+                {/* Bouton Pillule */}
                 <div className="pt-2">
                   <button 
                     className="group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full border-2 bg-white transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-lg"
@@ -150,27 +167,19 @@ export default function SuperFonct() {
                 </div>
               </div>
 
-              {/* === COLONNE IMAGE (Avec fond coloré) === */}
+              {/* === COLONNE IMAGE === */}
               <div
                 className={`relative flex justify-center ${
                   feature.imagePosition === 'left' ? 'lg:order-1' : 'lg:order-2'
                 }`}
                 data-aos={feature.imagePosition === 'left' ? "fade-right" : "fade-left"}
               >
-                {/* Fond décoratif (Blob coloré) */}
-              
-
                 {/* Conteneur Image avec Flottement */}
                 <div className="animate-float relative">
-                   {/* Ici je simule le "carré arrondi" de ton design autour du téléphone si besoin, 
-                       mais pour un look moderne "Hero", le téléphone détouré flottant est mieux.
-                       Si tu as l'image avec le fond carré vert/orange/bleu, utilise-la directement.
-                   */}
                    <img 
                     src={feature.imageSrc} 
                     alt={`${feature.brand} ${feature.service}`} 
                     className=""
-                   // Ombre colorée dynamique
                    />
                 </div>
               </div>
