@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import WajedServices from './pages/WajedServices';
 import WajedExperience from './pages/WajedExperience';
 
+// 🌍 1. IMPORTER LE CONTEXTE DE LANGUE
+import { LanguageProvider } from './components/LanguageContext'; 
 
-
-
-
-// ✅ ScrollToTop reste ici
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -26,28 +22,17 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <div>
-      <ScrollToTop />
-    
-     
-
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/services' element={<WajedServices />} />
-        <Route path='/experience' element={<WajedExperience />} />
-        
-        
-
-      
-
-       
-      </Routes>
-
-
-      
-
-    
-    </div>
+    // 🌍 2. ENVELOPPER L'APPLICATION AVEC LE PROVIDER
+    <LanguageProvider>
+      <div>
+        <ScrollToTop />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/services' element={<WajedServices />} />
+          <Route path='/experience' element={<WajedExperience />} />
+        </Routes>
+      </div>
+    </LanguageProvider>
   );
 }
 

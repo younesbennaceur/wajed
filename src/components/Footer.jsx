@@ -1,7 +1,11 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { useLanguage } from './LanguageContext'; // ✅ Import du système de langue
 
 export default function Footer({ variant = 'home' }) {
   // variant peut être : 'home', 'experience', 'go'
+
+  // ✅ Appel de la fonction de traduction 't'
+  const { t } = useLanguage();
 
   // --- Configuration des Thèmes ---
   const themes = {
@@ -40,9 +44,6 @@ export default function Footer({ variant = 'home' }) {
       <div className="relative h-80 sm:h-96 md:h-120 flex items-center justify-center overflow-hidden">
         {/* Large Watermark Image - Center */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60 mix-blend-multiply">
-          {/* Note: Si tu veux que le gros watermark change aussi, 
-             tu peux ajouter une propriété 'watermark' dans l'objet themes 
-          */}
           <img
             src={theme.watermark}
             alt="Wajed Watermark"
@@ -61,7 +62,8 @@ export default function Footer({ variant = 'home' }) {
               {/* Logo Dynamique */}
               <img src={theme.logo} alt={`Wajed ${variant}`} className="h-10 w-auto" />
               <p className="text-sm text-gray-600">
-                © 2025 Wajed. Tous droits réservés.
+                {/* ✅ Traduction du Copyright */}
+                © 2025 {t('brand_name')}. {t('footer_rights')}
               </p>
             </div>
 

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useLanguage } from './LanguageContext'; // ✅ Import du système de langue
 
 export default function SuperAppHero() {
-  
+  // ✅ Appel de la fonction de traduction 't'
+  const { t } = useLanguage();
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -51,24 +54,26 @@ export default function SuperAppHero() {
 
       {/* === ZONE DU HAUT : TEXTE (Flexible) === */}
       <div className="flex-1 flex flex-col justify-center items-center px-4 text-center z-20 pb-4">
-           
+            
            {/* Badge */}
            <div data-aos="fade-down" className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-[#4C9580]/30 rounded-full shadow-sm mb-6">
               <img src="Badge.svg" alt="" className="w-4 h-4"/>
-              <span className="text-[#4C9580] text-sm font-bold tracking-wide">Nouveau sur mobile</span>
+              {/* ✅ Traduction du badge */}
+              <span className="text-[#4C9580] text-sm font-bold tracking-wide">{t('hero_badge')}</span>
            </div>
 
            {/* Titre */}
            <h1 data-aos="fade-up" data-aos-delay="100" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-6">
-             La Super App Du Service <br className="hidden md:block"/> En Algérie!
+              {/* ✅ Traduction du titre */}
+              {t('hero_title')} <br className="hidden md:block"/> {t('hero_title_br')}
            </h1>
            
            {/* Sous-titre */}
            <p data-aos="fade-up" data-aos-delay="200" className="text-sm md:text-lg text-gray-600 max-w-xl mx-auto mb-8 font-medium">
-             Trouvez en quelques clics un prestataire de confiance pour vos besoins ou loisirs.
+             {/* ✅ Traduction du sous-titre */}
+             {t('hero_subtitle')}
            </p>
            
-           {/* Bouton */}
            {/* CTA Button Premium */}
             <div 
               data-aos="fade-up" 
@@ -85,22 +90,19 @@ export default function SuperAppHero() {
                    <img src="./apple.png" alt="App Store" className="h-5 w-5" />
                 </div>
                 
-              
                 <div className="h-5 w-px bg-white/30 mx-1"></div>
                 
-                <span className="font-bold tracking-wide text-sm sm:text-base">Télécharger l&apos;app</span>
+                {/* ✅ Traduction du bouton */}
+                <span className="font-bold tracking-wide text-sm sm:text-base">{t('nav_download')}</span>
               </button>
             </div>
       </div>
 
-
       
       <div className="relative w-full h-[35vh] sm:h-[42vh] md:h-[48vh] flex justify-center items-end shrink-0 z-20 mt-4 md:mt-8">
           
-         
           <div 
             data-aos="fade-up" data-aos-delay="200"
-           
             className="h-full w-auto max-w-full flex items-end"
           >
             {/* On garde l'animation de flottement sur l'ensemble */}

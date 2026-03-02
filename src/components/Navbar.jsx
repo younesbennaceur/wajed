@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { useLanguage } from './LanguageContext'; // ✅ Import du système de langue
 
 export default function Navbar({ variant = 'home' }) { 
   // 'variant' peut être : 'home' (défaut), 'experience', ou 'go'
 
+  // ✅ Utilisation du contexte global pour la langue
+  const { currentLang, setCurrentLang, t } = useLanguage();
+
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [superAppOpen, setSuperAppOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('FR');
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
 
@@ -20,7 +23,7 @@ export default function Navbar({ variant = 'home' }) {
       buttonBg: 'bg-[#4C9580]',
       buttonHover: 'hover:bg-[#3d7a68]',
       textHover: 'hover:text-[#4C9580]',
-      bgHoverLight: 'hover:bg-[#4C9580]/5', // Pour les items du menu
+      bgHoverLight: 'hover:bg-[#4C9580]/5',
       shadow: 'shadow-[#4C9580]/30'
     },
     experience: {
@@ -50,7 +53,6 @@ export default function Navbar({ variant = 'home' }) {
       bgHoverLight: 'hover:bg-[#8E44AD]/5',
       shadow: 'shadow-[#8E44AD]/30'
     }
-
   };
 
   const currentTheme = themes[variant] || themes.home;
@@ -66,15 +68,15 @@ export default function Navbar({ variant = 'home' }) {
 
   const languages = [
     { code: 'FR', name: 'Français', flag: './FR.png' },
-    { code: 'EN', name: 'English', flag: './GB.png' },
     { code: 'DZ', name: 'العربية', flag: '/DZ.png' }
   ];
 
+  // ✅ TRADUCTION DU DROPDOWN SUPER APP ICI
   const superAppLinks = [
-    { name: 'Wajed Home Services', path: '/services', icon: './Logo.png' },
-    { name: 'Wajed Experience', path: '/experience', icon: './exp.png' },
-    { name: 'Wajed Go', icon: './go.png' },
-    { name: 'Wajed Club', icon: './club.png' }
+    { name: `${t('brand_name')} ${t('service_1_name')}`, path: '/services', icon: './Logo.png' },
+    { name: `${t('brand_name')} ${t('service_2_name')}`, path: '/experience', icon: './exp.png' },
+    { name: `${t('brand_name')} ${t('service_3_name')}`, icon: './go.png' },
+    { name: `${t('brand_name')} ${t('service_4_name')}`, icon: './club.png' }
   ];
 
   const handleNavClick = (e, sectionId) => {
@@ -117,11 +119,10 @@ export default function Navbar({ variant = 'home' }) {
           <div className="hidden md:flex items-center space-x-8">
             
             <Link 
-                
                 to="/" 
                 className={`text-gray-600 font-medium transition-colors relative group ${currentTheme.textHover}`}
             >
-              Accueil
+              {t('nav_home')}
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full`} style={{ backgroundColor: currentTheme.color }}></span>
             </Link>
             
@@ -130,30 +131,28 @@ export default function Navbar({ variant = 'home' }) {
                 onClick={(e) => handleNavClick(e, 'fonctionnalites')} 
                 className={`text-gray-600 font-medium transition-colors relative group ${currentTheme.textHover}`}
             >
-              Fonctionnalités
+              {t('nav_features')}
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full`} style={{ backgroundColor: currentTheme.color }}></span>
             </a>
             
-            {/* === Super App Dropdown (CORRIGÉ) === */}
+            {/* === Super App Dropdown === */}
             <div className="relative group">
               <button
                 onClick={() => setSuperAppOpen(!superAppOpen)}
-                // Petit délai au blur pour permettre le clic sur le lien
                 onBlur={() => setTimeout(() => setSuperAppOpen(false), 200)}
                 className={`flex items-center gap-1 text-gray-600 font-medium transition-colors outline-none ${currentTheme.textHover}`}
               >
-                Super App
+                {t('nav_superapp')}
                 <ChevronDown size={16} className={`transition-transform duration-300 ${superAppOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* Contenu du Dropdown */}
               <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 transition-all duration-300 origin-top ${
                 superAppOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
               }`}>
                 {superAppLinks.map((link) => (
                   <button
-                    key={link.path}
-                    onClick={() => handleSuperAppClick(link.path)}
+                    key={link.path || link.name}
+                    onClick={() => handleSuperAppClick(link.path || "#")}
                     className={`w-full text-left px-4 py-3 flex items-center space-x-4 rounded-xl transition-colors group/item ${currentTheme.bgHoverLight}`}
                   >
                     <div className="bg-gray-50 p-2 rounded-lg group-hover/item:bg-white transition-colors shadow-sm">
@@ -166,18 +165,17 @@ export default function Navbar({ variant = 'home' }) {
             </div>
 
             <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')} className={`text-gray-600 font-medium transition-colors ${currentTheme.textHover}`}>
-              FAQ
+              {t('nav_faq')}
             </a>
              <a 
                 href="#contact" 
                 onClick={(e) => handleNavClick(e, 'contact')} 
                 className={`text-gray-600 font-medium transition-colors relative group ${currentTheme.textHover}`}
             >
-              Contactez-nous
+              {t('nav_contact')}
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full`} style={{ backgroundColor: currentTheme.color }}></span>
             </a>
           </div>
-          
 
           {/* --- Right Side (Desktop) --- */}
           <div className="hidden md:flex items-center gap-4">
@@ -194,7 +192,6 @@ export default function Navbar({ variant = 'home' }) {
                 <ChevronDown size={14} className="text-gray-400" />
               </button>
 
-              {/* Language Dropdown */}
               <div className={`absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-200 ${
                   langOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'
               }`}>
@@ -219,7 +216,7 @@ export default function Navbar({ variant = 'home' }) {
             >
               <img src="./play.png" alt="" className="w-4 h-4" />
               <img src="./apple.png" alt="" className="w-4 h-4" />
-              <span className="text-sm">Télécharger</span>
+              <span className="text-sm">{t('nav_download_short')}</span>
             </button>
           </div>
 
@@ -232,21 +229,20 @@ export default function Navbar({ variant = 'home' }) {
           </button>
         </div>
 
-        {/* --- Mobile Menu Content (CORRIGÉ) --- */}
+        {/* --- Mobile Menu Content --- */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0 py-0'
         }`}>
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 space-y-4">
              <Link 
-                
                 to="/" 
                 className={`text-gray-600 font-medium transition-colors relative group ${currentTheme.textHover}`}
             >
-              Accueil
+              {t('nav_home')}
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full`} style={{ backgroundColor: currentTheme.color }}></span>
             </Link>
             <a href="#fonctionnalites" onClick={(e) => handleNavClick(e, 'fonctionnalites')} className={`block px-4 py-2 text-gray-700 rounded-xl font-medium transition-colors ${currentTheme.bgHoverLight} ${currentTheme.textHover}`}>
-              Fonctionnalités
+              {t('nav_features')}
             </a>
             
             {/* Mobile Super App Accordion */}
@@ -255,18 +251,18 @@ export default function Navbar({ variant = 'home' }) {
                 onClick={() => setSuperAppOpen(!superAppOpen)}
                 className={`w-full flex items-center justify-between px-4 py-2 text-gray-700 font-medium transition-colors ${currentTheme.bgHoverLight} ${currentTheme.textHover}`}
               >
-                <span>Super App</span>
+                <span>{t('nav_superapp')}</span>
                 <ChevronDown size={16} className={`transition-transform ${superAppOpen ? 'rotate-180' : ''}`} />
               </button>
               
               <div className={`space-y-1 pl-4 border-l-2 border-gray-100 ml-4 mt-1 transition-all duration-300 ${superAppOpen ? 'max-h-48' : 'max-h-0 overflow-hidden'}`}>
                 {superAppLinks.map((link) => (
                   <button
-                    key={link.path}
-                    onClick={() => handleSuperAppClick(link.path)}
+                    key={link.path || link.name}
+                    onClick={() => handleSuperAppClick(link.path || "#")}
                     className={`w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-600 transition-colors ${currentTheme.textHover}`}
                   >
-                    {link.icon && <img src={link.icon} alt="" className="w-10 h-5 " />}
+                    {link.icon && <img src={link.icon} alt="" className="w-10 h-5 object-contain" />}
                     <span>{link.name}</span>
                   </button>
                 ))}
@@ -274,17 +270,16 @@ export default function Navbar({ variant = 'home' }) {
             </div>
 
             <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')} className={`block px-4 py-2 text-gray-700 rounded-xl font-medium transition-colors ${currentTheme.bgHoverLight} ${currentTheme.textHover}`}>
-              FAQ
+              {t('nav_faq')}
             </a>
              <a 
                 href="#contact" 
                 onClick={(e) => handleNavClick(e, 'contact')} 
                 className={`text-gray-600 font-medium transition-colors relative group ${currentTheme.textHover}`}
             >
-              Contactez-nous
+              {t('nav_contact')}
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full`} style={{ backgroundColor: currentTheme.color }}></span>
             </a>
-            
             
             <div className="pt-4 border-t border-gray-100 flex flex-col gap-3">
                {/* Mobile Lang */}
@@ -295,13 +290,13 @@ export default function Navbar({ variant = 'home' }) {
                       onClick={() => handleLangChange(lang)}
                       className={`px-3 py-1 rounded-full text-sm flex items-center gap-2 border ${
                         currentLang === lang.code 
-                            ? `border-[${currentTheme.color}] text-[${currentTheme.color}]` // Fallback simple
+                            ? `border-[${currentTheme.color}] text-[${currentTheme.color}]`
                             : 'border-gray-200 text-gray-500'
                       }`}
                       style={{ 
                           borderColor: currentLang === lang.code ? currentTheme.color : '',
                           color: currentLang === lang.code ? currentTheme.color : '',
-                          backgroundColor: currentLang === lang.code ? `${currentTheme.color}10` : '' // 10 = hex alpha
+                          backgroundColor: currentLang === lang.code ? `${currentTheme.color}10` : ''
                       }}
                     >
                       <img src={lang.flag} alt="" className="w-4 h-4 rounded-full"/>
@@ -313,7 +308,7 @@ export default function Navbar({ variant = 'home' }) {
                <button className={`w-full flex justify-center items-center gap-2 text-white px-6 py-3 rounded-xl font-medium shadow-lg active:scale-95 transition-transform ${currentTheme.buttonBg} ${currentTheme.shadow}`}>
                 <img src="./play.png" alt="" className="w-5 h-5" />
                 <img src="./apple.png" alt="" className="w-5 h-5" />
-                <span>Télécharger l&apos;app</span>
+                <span>{t('nav_download')}</span>
               </button>
             </div>
           </div>

@@ -1,40 +1,44 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
-import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useLanguage } from './LanguageContext'; // ✅ Import du système de langue
 
 export default function FAQ() {
+  // ✅ On récupère la fonction de traduction 't'
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
+
   useEffect(() => {
       AOS.init({
-        duration: 1000, // Une animation douce (1 seconde)
-        once: true,     // L'animation ne se joue qu'une fois pour ne pas gêner la lecture
-        offset: 100,    // Déclenche l'animation un peu avant que l'élément soit tout en haut
-        easing: 'ease-out-cubic', // Une courbe de vitesse naturelle
+        duration: 1000, 
+        once: true,    
+        offset: 100,    
+        easing: 'ease-out-cubic', 
       });
     }, []);
 
+  // ✅ On remplace le texte en dur par les appels de traduction
   const faqs = [
     {
-      question: "Comment réserver un service sur Wajed ?",
-      answer: "Il vous suffit de chercher un prestataire ou de poster une annonce. Vous recevrez des propositions, et vous pourrez réserver en quelques clics."
+      question: t('faq_q1'),
+      answer: t('faq_a1')
     },
     {
-      question: "Est-ce que les prestataires sont vérifiés ?",
-      answer: "Oui. Chaque prestataire passe par une vérification d'identité et peut fournir des documents (certificats, équipements, etc.)."
+      question: t('faq_q2'),
+      answer: t('faq_a2')
     },
     {
-      question: "Quels types de services puis-je trouver ?",
-      answer: "Ménage, bricolage, jardinage, beauté, aide à domicile, informatique, cours particuliers... et bien plus !"
+      question: t('faq_q3'),
+      answer: t('faq_a3')
     },
     {
-      question: "Comment fonctionne le paiement ?",
-      answer: "Vous pouvez payer en toute sécurité par carte ou en espèces à la fin de la prestation."
+      question: t('faq_q4'),
+      answer: t('faq_a4')
     },
     {
-      question: "Comment devenir prestataire ?",
-      answer: "Téléchargez l'application Wajed Prestataire, créez votre compte, et commencez à recevoir des demandes."
+      question: t('faq_q5'),
+      answer: t('faq_a5')
     }
   ];
 
@@ -43,16 +47,16 @@ export default function FAQ() {
   };
 
   return (
-    <div  className="bg-white  py-12 md:py-20">
+    <div  className="bg-white py-12 md:py-20">
       <div data-aos="fade-down" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-black">
-            FAQ
+            {t('faq_title')} {/* ✅ Traduction */}
           </h2>
-          <p className="text-gray-600 text-lg">
-            Vous avez des questions ? On a les réponses. Voici les plus <br />
-            fréquentes.
+          {/* Remplacement du <br/> par max-w-2xl pour un meilleur affichage multilingue */}
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            {t('faq_subtitle')} {/* ✅ Traduction */}
           </p>
         </div>
 
@@ -63,9 +67,11 @@ export default function FAQ() {
               {/* Question */}
               <button
                 onClick={() => toggleAccordion(index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition"
+                // ✅ text-start remplace text-left pour bien s'aligner en arabe
+                className="w-full px-6 py-5 flex items-center justify-between text-start hover:bg-gray-50 transition"
               >
-                <h3 className="text-base font-bold text-gray-900 pr-4">
+                {/* ✅ pe-4 (padding-end) remplace pr-4 pour s'adapter à l'arabe */}
+                <h3 className="text-base font-bold text-gray-900 pe-4">
                   {faq.question}
                 </h3>
                 <span className={`text-gray-600 flex-shrink-0 transition text-2xl ${
@@ -77,7 +83,8 @@ export default function FAQ() {
 
               {/* Answer */}
               {openIndex === index && (
-                <div className="px-6 pb-5 bg-gray-50">
+                // ✅ Ajout de text-start ici aussi
+                <div className="px-6 pb-5 bg-gray-50 text-start">
                   <p className="text-gray-600 text-sm leading-relaxed">
                     {faq.answer}
                   </p>
