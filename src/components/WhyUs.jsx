@@ -1,30 +1,41 @@
+import React from 'react';
+import { useLanguage } from './LanguageContext'; // ✅ Import du système de langue
+
 export default function Pourquoi() {
+  
+  // ✅ Appel de la fonction de traduction 't'
+  const { t } = useLanguage();
+
+  // ✅ Utilisation des traductions dans le tableau
   const features = [
-    "Des prestataires rapidement, près de chez vous.",
-    "Recevez les propositions, choisissez selon vous.",
-    "Payez par carte ou en espèces en toute sérénité.",
-    "Une équipe à votre écoute en cas de besoin.",
-    "Des prestataires vérifiés Identité, expérience et avis"
+    t('why_feat_1'),
+    t('why_feat_2'),
+    t('why_feat_3'),
+    t('why_feat_4'),
+    t('why_feat_5')
   ];
 
   return (
-    <div className="bg-gray-50 py-12 md:py-20">
+    <div className="bg-gray-50 py-12 md:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
-            <span className="text-black">Pourquoi </span>
-            <span className="text-[#4C9580] ">Wajed</span>
-            <span className="text-black"> ?</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 flex justify-center gap-2 flex-wrap">
+            <span className="text-black">{t('why_title_1')}</span>
+            <span className="text-[#4C9580] font-normal" style={{ fontFamily: "'Croogla 4F', sans-serif", textTransform: 'lowercase' }}>
+              {t('brand_name')}
+            </span>
+            <span className="text-black">{t('why_title_2')}</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Une plateforme simple, rapide et sécurisée pour <br />
-            trouver des prestataires de confiance.
+            {t('why_subtitle')}
           </p>
         </div>
 
         {/* Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          
           {/* Left - Features List */}
           <div className="space-y-6">
             {features.map((feature, index) => (
@@ -46,8 +57,9 @@ export default function Pourquoi() {
                   </div>
                 </div>
                 {/* Text */}
-                <div>
-                  <p className="text-2xl  font-medium text-gray-900">
+                {/* ✅ text-start force l'alignement naturel du texte (gauche ou droite) */}
+                <div className="text-start">
+                  <p className="text-2xl font-medium text-gray-900 leading-snug">
                     {feature}
                   </p>
                 </div>
@@ -56,18 +68,13 @@ export default function Pourquoi() {
           </div>
 
           {/* Right - Images */}
-          <div className=" md:flex justify-center items-center">
+          <div className="md:flex justify-center items-center">
             <div className="relative w-full h-96 flex justify-center items-center">
               {/* Phones Container */}
-              
-              <img className="w-128 lg:h-120" src="./pourquoi.png" alt="" />
-
-              
-            
+              <img className="w-128 lg:h-120 object-contain drop-shadow-xl" src="./pourquoi.png" alt="Pourquoi Wajed" />
             </div>
           </div>
 
-         
         </div>
       </div>
     </div>
